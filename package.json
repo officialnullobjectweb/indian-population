@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "clean-data": "node scripts/clean-data.js",
+    "build": "node scripts/clean-data.js",
     "start": "npx serve . -l 8080",
     "test:e2e": "playwright test"
   },
