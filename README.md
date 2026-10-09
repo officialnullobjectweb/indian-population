@@ -5,7 +5,11 @@ locally installed `d3` — no CDN, no API calls. All data files are local.
 
 ![India choropleth](docs/og-image.png)
 
-🎬 [Watch the demo tour](docs/demo.webm) · Click a state to zoom into its districts,
+🎬 Demo tour (click to play — MP4 plays right on GitHub):
+
+[![Demo tour: drill from India to a district](docs/screenshot-focus.png)](docs/demo.mp4)
+
+([webm version](docs/demo.webm)) Click a state to zoom into its districts,
 click a district to focus it, recolor by literacy / sex ratio / electricity.
 
 | India (dark) | Districts | District focus |
