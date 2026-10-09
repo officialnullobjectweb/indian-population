@@ -1,0 +1,14 @@
+{
+  "name": "indian-population-map",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive map of India (Census 2011) — plain HTML/CSS/JS + local d3, no CDN, no API calls.",
+  "type": "module",
+  "scripts": {
+    "clean-data": "node scripts/clean-data.js",
+    "start": "npx serve . -l 8080"
+  },
+  "dependencies": {
+    "d3": "^7.9.0"
+  }
+}

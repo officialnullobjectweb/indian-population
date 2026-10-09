@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>India Population Map — Census 2011</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="wrap site-head">
+    <div class="head-row">
+      <h1>India — Population by State &amp; District</h1>
+      <button id="theme-btn" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <p class="sub">Interactive choropleth &middot; Source: <strong>Census 2011</strong> &middot; Hover a state, click to zoom into its districts</p>
+  </header>
+
+  <main class="wrap layout">
+    <section class="map-card" aria-label="Map coloured by Census 2011 population">
+      <div class="map-toolbar">
+        <button id="back-btn" type="button" hidden>&larr; Back to India</button>
+        <span id="crumb" aria-live="polite">India</span>
+        <div id="metric-wrap" class="metric-wrap" hidden>
+          <span class="metric-label" id="metric-label">Colour by</span>
+          <div class="dropdown" id="metric-dd">
+            <button id="metric-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="metric-label metric-btn-text">
+              <span id="metric-btn-text">Population</span>
+              <svg class="dd-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul id="metric-list" role="listbox" aria-labelledby="metric-label" hidden>
+              <li role="option" tabindex="-1" data-value="population" aria-selected="true" class="selected">Population<span class="tick" aria-hidden="true">✓</span></li>
+              <li role="option" tabindex="-1" data-value="literacy_rate" aria-selected="false">Literacy rate<span class="tick" aria-hidden="true">✓</span></li>
+              <li role="option" tabindex="-1" data-value="sex_ratio" aria-selected="false">Sex ratio (F per 1000 M)<span class="tick" aria-hidden="true">✓</span></li>
+              <li role="option" tabindex="-1" data-value="electricity_pct" aria-selected="false">Households with electricity %<span class="tick" aria-hidden="true">✓</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="map-holder">
+        <div id="tooltip" role="status" aria-live="polite" hidden></div>
+      </div>
+      <p class="zoom-hint">Tip: scrolling here moves the page &mdash; use Ctrl/Cmd&nbsp;+&nbsp;scroll, double-click, or pinch to zoom the map.</p>
+      <div class="legend-row">
+        <div id="legend" aria-label="Population legend"></div>
+        <div class="legend-scale"><span id="legend-min"></span><span id="legend-max"></span></div>
+      </div>
+      <p id="status" class="status" aria-live="polite">Loading local data…</p>
+      <details id="unmatched" hidden>
+        <summary>Data notes</summary>
+        <p id="unmatched-text"></p>
+      </details>
+    </section>
+
+    <aside class="side">
+      <section id="district-panel" hidden aria-live="polite">
+        <h2 id="dp-title">District</h2>
+        <p id="dp-sub" class="dp-sub"></p>
+        <div id="dp-stats"></div>
+        <details id="dp-all">
+          <summary>All census indicators for this district</summary>
+          <table id="dp-table"><tbody></tbody></table>
+        </details>
+      </section>
+      <h2>How matching works</h2>
+      <ul>
+        <li>Loads <code>public/data/india-states.geojson</code>, <code>public/data/india-districts.geojson</code> (boundaries: DataMeet, CC BY 4.0, 2011 vintage), <code>src/data/states.json</code> + <code>src/data/districts.json</code> (640 districts, 118 Census columns, built by <code>scripts/clean-data.js</code> — local files only).</li>
+        <li>Names normalised: lower-cased, <code>&amp;</code> → <code>and</code>, punctuation stripped; alias table fixes <code>bangalore/bengaluru</code>, <code>gurgaon/gurugram</code>, <code>orissa/odisha</code>, <code>uttaranchal/uttarakhand</code> and ~25 more vintage spellings.</li>
+        <li>Districts with no match show <code>Data not available</code>; every unmatched name is logged to the console for alias-table fixes.</li>
+        <li>Populations shown with Indian grouping (<code>en-IN</code>) plus lakhs / crores.</li>
+      </ul>
+      <p class="src">Source: <strong>Census 2011</strong>, Government of India.</p>
+    </aside>
+  </main>
+
+  <footer class="wrap foot">
+    <span>Plain HTML/CSS/JS + local <code>d3</code> (node_modules, no CDN). No API calls. Boundaries: DataMeet maps (CC BY 4.0).</span>
+  </footer>
+
+  <!-- Local d3 only — no CDN -->
+  <script src="./node_modules/d3/dist/d3.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
