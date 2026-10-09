@@ -98,14 +98,11 @@ h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0; }
   border-radius: 16px;
   padding: 14px;
   box-shadow: 0 8px 28px rgba(8, 48, 107, 0.08);
-  /* stay visible while the side panel scrolls */
+  /* sticky on desktop, but never scrolls internally — only the page scrolls */
   position: sticky;
   top: 12px;
   align-self: start;
-  max-height: calc(100vh - 24px);
-  max-height: calc(100dvh - 24px);
-  overflow-y: auto;
-  scrollbar-width: thin;
+  overflow: visible;
 }
 #map-holder { position: relative; background: var(--mapbg); border-radius: 8px; }
 #map-holder svg {
@@ -257,8 +254,8 @@ h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0; }
 /* ---------- tablets & phones ---------- */
 @media (max-width: 860px) {
   .layout { grid-template-columns: 1fr; }
-  /* static on small screens: a full-height sticky card would cover the text behind it */
-  .map-card { position: static; max-height: none; overflow: visible; top: auto; }
+  /* static on small screens: a sticky card would cover the text behind it */
+  .map-card { position: static; top: auto; }
   #map-holder svg { max-height: 58vh; }
   .metric-wrap { margin-left: 0; }
 }
