@@ -114,11 +114,11 @@
   </main>
 
   <footer class="wrap foot">
-    <span>Plain HTML/CSS/JS + local <code>d3</code> (node_modules, no CDN). No API calls. Boundaries: DataMeet maps (CC BY 4.0).</span>
+    <span>Plain HTML/CSS/JS + vendored <code>d3</code> (no CDN). No API calls. Boundaries: DataMeet maps (CC BY 4.0).</span>
   </footer>
 
-  <!-- Local d3 only — no CDN -->
-  <script src="./node_modules/d3/dist/d3.min.js"></script>
+  <!-- Vendored d3 (committed under vendor/) — no CDN, deploys anywhere -->
+  <script src="./vendor/d3.min.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>
