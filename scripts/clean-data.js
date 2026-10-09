@@ -7,7 +7,7 @@
  * Defaults (relative to the Indian-pupulation folder):
  *   rawCsv         india-districts-census-2011.csv  (falls back to public/data/districts.csv)
  *   districtsGeo   public/data/india-districts.geojson
- *   outJson        src/data/districts.json
+ *   outJson        public/data/districts.json
  *
  * Cleaning:
  *   - trims every cell and collapses inner whitespace in names
@@ -36,7 +36,7 @@ const ROOT = path.resolve(__dirname, "..");
 const RAW_CANDIDATES = ["india-districts-census-2011.csv", "public/data/districts.csv"];
 const rawArg = process.argv[2];
 const geoArg = process.argv[3] || "public/data/india-districts.geojson";
-const outArg = process.argv[4] || "src/data/districts.json";
+const outArg = process.argv[4] || "public/data/districts.json";
 
 function pickRaw() {
   if (rawArg) return rawArg;

@@ -104,7 +104,7 @@ test('unmatched districts show the no-data fallback', async ({ page }) => {
 test('clean-data pipeline produces numeric district json', async () => {
   const { stdout } = await execFileAsync('node', ['scripts/clean-data.js'], { cwd: process.cwd() });
   expect(stdout).toMatch(/wrote 640 districts/);
-  const json = JSON.parse(fs.readFileSync('src/data/districts.json', 'utf8'));
+  const json = JSON.parse(fs.readFileSync('public/data/districts.json', 'utf8'));
   expect(json.districts).toHaveLength(640);
   expect(json.districts.every((d) => typeof d.population === 'number')).toBe(true);
   expect(json.districts.every((d) => d.state_norm && d.district_norm)).toBe(true);

@@ -1,3 +1,5 @@
+@tailwind utilities;
+
 /* Light is the default; data-theme overrides it, OS preference fills in when unset. */
 :root, :root[data-theme="light"] {
   color-scheme: light;

@@ -1,7 +1,7 @@
 # India — Population by State & District (Census 2011)
 
-Interactive choropleth of India with state → district drill-down. Plain HTML/CSS/JS plus
-locally installed `d3` — no CDN, no API calls. All data files are local.
+Interactive choropleth of India with state → district drill-down. **Next.js + React**,
+d3 for the map (bundled via npm) — no CDN, no API calls. All data files are local.
 
 ![India choropleth](docs/og-image.png)
 
@@ -20,36 +20,43 @@ click a district to focus it, recolor by literacy / sex ratio / electricity.
 
 ```bash
 npm install
-npm run clean-data   # rebuild src/data/districts.json from the raw CSV
-npx serve . -l 8080  # or: python3 -m http.server 8080
+npm run dev        # http://localhost:3000
+npm run clean-data # rebuild public/data/districts.json from the raw CSV
 ```
 
-Open `http://localhost:8080/`. (`file://` won't work — the app fetches local data files.)
+Production: `npm run build && npm start`.
 
 ## Test
 
 ```bash
 npm run test:e2e      # 9 Playwright tests: views, drill-down, dropdown, theme, fallback, locality
-node scripts/capture-assets.mjs http://localhost:8080  # regenerate docs/ screenshots + demo
+npm run capture-assets -- http://localhost:3000  # regenerate docs/ screenshots + demo
 ```
 
 The suite also asserts the page makes **zero external network requests**.
 
 ## SEO
 
-Single-page SEO included: title, meta description/keywords, Open Graph + Twitter cards
+App-router metadata included: title, description, keywords, Open Graph + Twitter cards
 (`docs/og-image.png`), JSON-LD (`WebApplication` + Census `Dataset`), SVG favicon,
 `robots.txt`, and `sitemap.xml` (replace the placeholder domain on deploy).
 
-## Data
+## Tech
+
+- Next.js 14 App Router + React 18 (`app/`, `components/`)
+- d3 v7 (SVG map, zoom, scales) — imported from npm, bundled
+- Tailwind configured (preflight off; the hand-rolled `app/globals.css` is the design system)
+- Scripts: `scripts/clean-data.js` (CSV → JSON + mismatch report), `scripts/capture-assets.mjs`
+
+## Data (`public/data/`)
 
 | File | What |
 |---|---|
-| `public/data/india-states.geojson` | State boundaries (GADM vintage; J&K north restored from districts) |
-| `public/data/india-districts.geojson` | 641 district shapes, converted from DataMeet `Districts/Census_2011` (CC BY 4.0), simplified |
-| `src/data/states.json` | State populations, Census 2011 |
-| `src/data/districts.json` | 640 districts × 118 Census columns, built by `scripts/clean-data.js` |
-| `india-districts-census-2011.csv` | Raw Census source for the script above |
+| `india-states.geojson` | State boundaries (GADM vintage; J&K north restored from districts) |
+| `india-districts.geojson` | 641 district shapes, converted from DataMeet `Districts/Census_2011` (CC BY 4.0), simplified |
+| `states.json` | State populations, Census 2011 |
+| `districts.json` | 640 districts × 118 Census columns, built by `scripts/clean-data.js` |
+| `districts.csv` | Same data as CSV (fallback input for the script) |
 
 Names are matched after lower-casing, `&` → `and`, punctuation stripping, plus an alias
 table (`bangalore/bengaluru`, `orissa/odisha`, …). Unmatched districts show

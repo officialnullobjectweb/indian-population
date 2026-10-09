@@ -9,7 +9,7 @@ const browser = await chromium.launch();
 async function shot(name, setup, w = 1280, h = 800, scheme = 'light') {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: scheme });
   const page = await ctx.newPage();
-  await page.goto(BASE + '/index.html');
+  await page.goto(BASE + '/');
   await page.locator('#map-holder svg path').first().waitFor({ timeout: 30000 });
   await setup(page);
   await page.waitForTimeout(700);
@@ -42,7 +42,7 @@ const vctx = await browser.newContext({
   recordVideo: { dir: 'docs/.tmp-video', size: { width: 1280, height: 800 } },
 });
 const vp = await vctx.newPage();
-await vp.goto(BASE + '/index.html');
+await vp.goto(BASE + '/');
 await vp.locator('#map-holder svg path').first().waitFor({ timeout: 30000 });
 await vp.waitForTimeout(1000);
 await drillKarnataka(vp);
