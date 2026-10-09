@@ -375,6 +375,11 @@
       });
       logUnmatchedDistricts();
       renderIndia();
+      var totalPop = S.stateRows.reduce(function (a, r) { return a + num(r.population); }, 0);
+      var tf = formatIndian(totalPop);
+      document.getElementById("stat-pop").textContent = tf.grouped + " (" + tf.label + ")";
+      document.getElementById("stat-states").textContent = String(S.stateRows.length);
+      document.getElementById("stat-districts").textContent = String(S.distRows.length);
       statusEl.textContent = S.stateRows.length + " states/UTs · " + S.distRows.length + " districts · Source: Census 2011 — click a state to zoom in";
     })
     .catch(function (err) {

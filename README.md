@@ -3,6 +3,15 @@
 Interactive choropleth of India with state → district drill-down. Plain HTML/CSS/JS plus
 locally installed `d3` — no CDN, no API calls. All data files are local.
 
+![India choropleth](docs/og-image.png)
+
+🎬 [Watch the demo tour](docs/demo.webm) · Click a state to zoom into its districts,
+click a district to focus it, recolor by literacy / sex ratio / electricity.
+
+| India (dark) | Districts | District focus |
+|---|---|---|
+| ![dark](docs/screenshot-india-dark.png) | ![districts](docs/screenshot-districts.png) | ![focus](docs/screenshot-focus.png) |
+
 ## Run
 
 ```bash
@@ -12,6 +21,21 @@ npx serve . -l 8080  # or: python3 -m http.server 8080
 ```
 
 Open `http://localhost:8080/`. (`file://` won't work — the app fetches local data files.)
+
+## Test
+
+```bash
+npm run test:e2e      # 9 Playwright tests: views, drill-down, dropdown, theme, fallback, locality
+node scripts/capture-assets.mjs http://localhost:8080  # regenerate docs/ screenshots + demo
+```
+
+The suite also asserts the page makes **zero external network requests**.
+
+## SEO
+
+Single-page SEO included: title, meta description/keywords, Open Graph + Twitter cards
+(`docs/og-image.png`), JSON-LD (`WebApplication` + Census `Dataset`), SVG favicon,
+`robots.txt`, and `sitemap.xml` (replace the placeholder domain on deploy).
 
 ## Data
 

@@ -6,9 +6,13 @@
   "type": "module",
   "scripts": {
     "clean-data": "node scripts/clean-data.js",
-    "start": "npx serve . -l 8080"
+    "start": "npx serve . -l 8080",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "d3": "^7.9.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0"
   }
 }

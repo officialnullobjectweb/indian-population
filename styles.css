@@ -71,6 +71,17 @@ header.wrap { padding-top: 24px; }
 #theme-btn svg { display: block; }
 h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0; }
 .sub { color: var(--muted); margin: 4px 0 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+.chip {
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+.chip strong { color: var(--fg); font-variant-numeric: tabular-nums; }
+::selection { background: #2f73ae; color: #fff; }
 .layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -82,8 +93,9 @@ h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0; }
 .map-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 8px 28px rgba(8, 48, 107, 0.08);
   /* stay visible while the side panel scrolls */
   position: sticky;
   top: 12px;
@@ -91,6 +103,7 @@ h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0; }
   max-height: calc(100vh - 24px);
   max-height: calc(100dvh - 24px);
   overflow-y: auto;
+  scrollbar-width: thin;
 }
 #map-holder { position: relative; background: var(--mapbg); border-radius: 8px; }
 #map-holder svg {
@@ -104,6 +117,7 @@ h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0; }
   stroke-width: 0.8;
   cursor: pointer;
   outline: none;
+  transition: fill 0.3s ease, filter 0.2s ease;
 }
 .state:hover, .state:focus-visible, .state.active {
   stroke: var(--hover-stroke);
